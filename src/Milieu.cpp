@@ -45,6 +45,10 @@ void Milieu::step( void )
 
    }
 
+   // on enlève du vecteur de Bestioles les bestioles qui sont mortes
+   auto predicate = [](const Bestiole &b) { return b.vie < 1; };
+   listeBestioles.erase(std::remove_if(listeBestioles.begin(), listeBestioles.end(), predicate), listeBestioles.end());
+
 }
 
 

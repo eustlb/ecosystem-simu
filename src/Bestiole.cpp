@@ -9,6 +9,8 @@
 const double      Bestiole::AFF_SIZE = 8.;
 const double      Bestiole::MAX_VITESSE = 10.;
 const double      Bestiole::LIMITE_VUE = 30.;
+const int         Bestiole::MAX_VIE = 100;
+
 
 int               Bestiole::next = 0;
 
@@ -23,7 +25,7 @@ Bestiole::Bestiole( IComportement* comp )
    orientation = static_cast<double>( rand() )/RAND_MAX*2.*M_PI;
    vitesse = static_cast<double>( rand() )/RAND_MAX*MAX_VITESSE;
 
-   vie = rand() % 100; 
+   vie = rand() % MAX_VIE; 
    comportement = comp;
 
    cout << "const Bestiole (" << identite << ") par defaut et vie :" << vie << endl;

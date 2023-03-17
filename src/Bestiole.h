@@ -20,18 +20,20 @@ private :
    static const double     AFF_SIZE;
    static const double     MAX_VITESSE;
    static const double     LIMITE_VUE;
+   static const int        MAX_VIE;
+
 
    static int              next;
 
 private :
    int               identite;
    int               x, y;
-   int               vie; // -1 à chaque step, morte si 0 
    double            cumulX, cumulY;
    double            orientation;
    double            vitesse;
 
 public :
+   int               vie; // -1 à chaque step, morte si 0 
    IComportement* comportement;
 
 private :
