@@ -6,6 +6,7 @@
 class Kamikaze : public IComportement 
 {
 public:
+    Kamikaze();
     void bouge(Bestiole* bestiole);
 };
 

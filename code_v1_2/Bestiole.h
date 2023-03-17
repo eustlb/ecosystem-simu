@@ -1,10 +1,11 @@
 #ifndef _BESTIOLES_H_
 #define _BESTIOLES_H_
 
-
 #include "UImg.h"
 
 #include <iostream>
+
+#include "IComportement.h"
 
 using namespace std;
 
@@ -30,13 +31,14 @@ private :
    double            orientation;
    double            vitesse;
 
-   T               * couleur;
+public :
+   IComportement* comportement;
 
 private :
    void bouge( int xLim, int yLim );
 
 public :                                           // Forme canonique :
-   Bestiole( void );                               // Constructeur par defaut
+   Bestiole( IComportement* comp );                // Constructeur par defaut
    Bestiole( const Bestiole & b );                 // Constructeur de copies
    ~Bestiole( void );                              // Destructeur
                                                    // Operateur d'affectation binaire par defaut

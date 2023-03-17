@@ -13,7 +13,7 @@ const double      Bestiole::LIMITE_VUE = 30.;
 int               Bestiole::next = 0;
 
 
-Bestiole::Bestiole( void )
+Bestiole::Bestiole( IComportement* comp )
 {
 
    identite = ++next;
@@ -23,14 +23,10 @@ Bestiole::Bestiole( void )
    orientation = static_cast<double>( rand() )/RAND_MAX*2.*M_PI;
    vitesse = static_cast<double>( rand() )/RAND_MAX*MAX_VITESSE;
 
-   couleur = new T[ 3 ];
-   couleur[ 0 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-   couleur[ 1 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-   couleur[ 2 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-
    vie = rand() % 100; 
+   comportement = comp;
 
-   cout << "const Bestiole (" << identite << ") par defaut et vie:" << vie << endl;
+   cout << "const Bestiole (" << identite << ") par defaut et vie :" << vie << endl;
 
 }
 
@@ -47,8 +43,7 @@ Bestiole::Bestiole( const Bestiole & b )
    cumulX = cumulY = 0.;
    orientation = b.orientation;
    vitesse = b.vitesse;
-   couleur = new T[ 3 ];
-   memcpy( couleur, b.couleur, 3*sizeof(T) );
+   comportement = b.comportement;
 
    vie = b.vie;
 
@@ -57,10 +52,9 @@ Bestiole::Bestiole( const Bestiole & b )
 
 Bestiole::~Bestiole( void )
 {
+   // à faire 
 
-   delete[] couleur;
-
-   cout << "dest Bestiole" << endl;
+   cout << "dest Bestiole ("<< this->identite << ")" << endl;
 
 }
 
@@ -132,9 +126,8 @@ void Bestiole::draw( UImg & support )
    double         xt = x + cos( orientation )*AFF_SIZE/2.1;
    double         yt = y - sin( orientation )*AFF_SIZE/2.1;
 
-
-   support.draw_ellipse( x, y, AFF_SIZE, AFF_SIZE/5., -orientation/M_PI*180., couleur );
-   support.draw_circle( xt, yt, AFF_SIZE/2., couleur );
+   support.draw_ellipse( x, y, AFF_SIZE, AFF_SIZE/5., -orientation/M_PI*180., this->comportement->couleur );
+   support.draw_circle( xt, yt, AFF_SIZE/2., this->comportement->couleur );
 
 }
 

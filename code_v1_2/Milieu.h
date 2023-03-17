@@ -3,13 +3,13 @@
 
 
 #include "UImg.h"
-#include "Bestiole.h"
 
 #include <iostream>
 #include <vector>
 
-using namespace std;
+#include "Bestiole.h"
 
+using namespace std;
 
 class Milieu : public UImg
 {

@@ -7,8 +7,7 @@ class Gregaire : public IComportement
 {
 public:
     Gregaire();
-    void bouge(Bestiole* bestiole);
-    
+    void bouge(Bestiole* bestiole);  
 };
 
 #endif

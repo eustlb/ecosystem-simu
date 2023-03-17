@@ -5,6 +5,12 @@
 
 #include "IComportement.h"
 
+#include "Gregaire.h"
+#include "Peureuse.h"
+#include "Kamikaze.h"
+#include "Prevoyante.h"
+#include "PersoMultiple.h"
+
 const T    Milieu::white[] = { (T)255, (T)255, (T)255 };
 
 
@@ -55,21 +61,33 @@ int Milieu::nbVoisins( const Bestiole & b )
    return nb;
 }
 
-// void Milieu::populate(float tx_gregaire, float tx_peureuse, float tx_kamikaze, float tx_prevoyante, float tx_persoMult, int tot)
-// {
-//    IComportement *c_gregaire = new Gregaire();
-//    IComportement *c_peureuse = new Peureuse();
-//    IComportement *c_kamikaze = new Kamikaze();
-//    IComportement *c_prevoyante = new Prevoyante();
-//    IComportement *c_persoMult = new PersoMult(c_gregaire, c_peureuse, c_kamikaze, c_prevoyante);
+void Milieu::populate(float tx_gregaire, float tx_peureuse, float tx_kamikaze, float tx_prevoyante, float tx_persoMult, int tot)
+{
+   Gregaire *c_gregaire = new Gregaire();
+   Peureuse *c_peureuse = new Peureuse();
+   Kamikaze *c_kamikaze = new Kamikaze();
+   Prevoyante *c_prevoyante = new Prevoyante();
+   IComportement *c_persoMult = new PersoMultiple(c_gregaire, c_peureuse, c_kamikaze, c_prevoyante);
 
+   for (int i = 0; i < tx_gregaire*tot; i++ ){
+      this->addMember(Bestiole(c_gregaire));
+   };
 
+   for (int i = 0; i < tx_peureuse*tot; i++ ){
+      this->addMember(Bestiole(c_peureuse));
+   };
 
+   for (int i = 0; i < tx_kamikaze*tot; i++ ){
+      this->addMember(Bestiole(c_kamikaze));
+   };
 
+      for (int i = 0; i < tx_prevoyante*tot; i++ ){
+      this->addMember(Bestiole(c_prevoyante));
+   };
 
-//    for (int i = 0; i < tx_gregaire*tot; i++ ){
-//       this->addMember(Bestiole(IComportement))
-//    }
+   for (int i = 0; i < tx_persoMult*tot; i++ ){
+      this->addMember(Bestiole(c_persoMult));
+   };
 
-// }
+}
 

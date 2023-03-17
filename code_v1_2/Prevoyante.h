@@ -6,6 +6,7 @@
 class Prevoyante : public IComportement 
 {
 public:
+    Prevoyante();
     void bouge(Bestiole* bestiole);
 };
 
