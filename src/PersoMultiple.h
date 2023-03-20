@@ -15,7 +15,7 @@ private:
     IComportement* actualComp; // comportement "actuel", c'est-à-dire celui à utiliser au step considéré 
 public:
     PersoMultiple(Gregaire* c_gregaire, Peureuse* c_peureuse, Kamikaze* c_kamikaze, Prevoyante* c_prevoyante);
-    void bouge(Bestiole* bestiole);
+    void bouge(int xLim, int yLim, Bestiole* bestiole);
     void changeComp(); // change de façon aléatoire le comportement actualComp par une des 4 comportements (pointeurs)
 };
 

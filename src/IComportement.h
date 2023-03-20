@@ -11,7 +11,7 @@ class IComportement // classe abstraite
         T couleur[3]; // couleur du comportement qui sera partagée par les bestioles de ce comportement
     public:
     /* fonction virtuelle pure*/
-        virtual void bouge(Bestiole* bestiole) = 0;
+        virtual void bouge(int xLim, int yLim, Bestiole* bestiole) = 0;
 
 };
 

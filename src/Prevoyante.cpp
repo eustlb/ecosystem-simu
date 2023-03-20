@@ -7,7 +7,7 @@ Prevoyante::Prevoyante()
     couleur[ 2 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
 }
 
-void Prevoyante::bouge(Bestiole* bestiole)
+void Prevoyante::bouge(int xLim, int yLim, Bestiole* bestiole)
 {
 
 }

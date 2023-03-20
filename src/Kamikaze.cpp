@@ -7,7 +7,7 @@ Kamikaze::Kamikaze()
     couleur[ 2 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
 }
 
-void Kamikaze::bouge(Bestiole* bestiole)
+void Kamikaze::bouge(int xLim, int yLim, Bestiole* bestiole)
 {
 
 }

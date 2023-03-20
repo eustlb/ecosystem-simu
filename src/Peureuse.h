@@ -7,7 +7,7 @@ class Peureuse : public IComportement
 {
 public:
     Peureuse();
-    void bouge(Bestiole* bestiole);
+    void bouge(int xLim, int yLim, Bestiole* bestiole);
 };
 
 #endif

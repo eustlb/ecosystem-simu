@@ -15,7 +15,7 @@ PersoMultiple::PersoMultiple(Gregaire* c_gregaire, Peureuse* c_peureuse, Kamikaz
     actualComp = comportements[i];
 }
 
-void PersoMultiple::bouge(Bestiole* bestiole)
+void PersoMultiple::bouge(int xLim, int yLim, Bestiole* bestiole)
 {
 
 }

@@ -34,6 +34,8 @@ public :
 
    void populate(float tx_gregaire, float tx_peureuse, float tx_kamikaze, float tx_prevoyante, float tx_persoMult, int tot);
 
+   void actualiserVoisins(Bestiole & b); // actualiser la liste des bestioles perçues par b
+
 };
 
 

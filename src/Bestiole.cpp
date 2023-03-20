@@ -4,12 +4,15 @@
 
 #include <cstdlib>
 #include <cmath>
+#include <tgmath.h> // pour fonction atan2
+
+#include "constantes.h"
+#include "Gregaire.h"
 
 
 const double      Bestiole::AFF_SIZE = 8.;
 const double      Bestiole::MAX_VITESSE = 10.;
-const double      Bestiole::LIMITE_VUE = 30.;
-const int         Bestiole::MAX_VIE = 100;
+const int         Bestiole::MAX_VIE = 1000;
 
 
 int               Bestiole::next = 0;
@@ -25,10 +28,17 @@ Bestiole::Bestiole( IComportement* comp )
    orientation = static_cast<double>( rand() )/RAND_MAX*2.*M_PI;
    vitesse = static_cast<double>( rand() )/RAND_MAX*MAX_VITESSE;
 
+   // parametres des capteurs, initialisation aléatoire
+   // vue
+   dist_vue = DIST_VUE_MIN + (DIST_VUE_MAX - DIST_VUE_MIN)*rand() / RAND_MAX;
+   alpha =  ALPHA_MIN + (ALPHA_MAX - ALPHA_MIN)*rand() / RAND_MAX;
+   // ouie
+   dist_ouie =  DIST_OUIE_MIN + (DIST_OUIE_MAX - DIST_OUIE_MIN)*rand() / RAND_MAX;
+
    vie = rand() % MAX_VIE; 
    comportement = comp;
 
-   cout << "const Bestiole (" << identite << ") par defaut et vie :" << vie << endl;
+   // cout << "const Bestiole (" << identite << ") par defaut et vie :" << vie << endl;
 
 }
 
@@ -47,6 +57,10 @@ Bestiole::Bestiole( const Bestiole & b )
    vitesse = b.vitesse;
    comportement = b.comportement;
 
+   dist_vue = b.dist_vue;
+   dist_ouie = b.dist_ouie;
+   alpha = b.alpha;
+
    vie = b.vie;
 
 }
@@ -54,9 +68,9 @@ Bestiole::Bestiole( const Bestiole & b )
 
 Bestiole::~Bestiole( void )
 {
-   // à faire 
 
-   cout << "dest Bestiole ("<< this->identite << ")" << endl;
+   
+   // cout << "dest Bestiole ("<< this->identite << ")" << endl;
 
 }
 
@@ -75,7 +89,7 @@ void Bestiole::bouge( int xLim, int yLim )
 
    double         nx, ny;
    double         dx = cos( orientation )*vitesse;
-   double         dy = -sin( orientation )*vitesse;
+   double         dy = -sin( orientation )*vitesse; // POURQUOI IL Y A UN - ????
    int            cx, cy;
 
 
@@ -112,13 +126,7 @@ void Bestiole::bouge( int xLim, int yLim )
 
 void Bestiole::action( Milieu & monMilieu )
 {
-   // détruire la bestiole si en fin de vie 
-   if (vie > 0) {
-      bouge( monMilieu.getWidth(), monMilieu.getHeight() );
-   }
-   else {
-      this->~Bestiole();
-   }
+   this->comportement->bouge(monMilieu.getWidth(), monMilieu.getHeight(), this);
 }
 
 
@@ -142,13 +150,52 @@ bool operator==( const Bestiole & b1, const Bestiole & b2 )
 }
 
 
-bool Bestiole::jeTeVois( const Bestiole & b ) const
+bool Bestiole::jeTendtends( const Bestiole & b ) const
 {
 
    double         dist;
 
 
    dist = std::sqrt( (x-b.x)*(x-b.x) + (y-b.y)*(y-b.y) );
-   return ( dist <= LIMITE_VUE );
+   return ( dist <= dist_ouie );
 
+}
+
+bool Bestiole::jeTeVois( const Bestiole & b ) const
+{
+
+   double         dist;
+   double angle; // angle par rapport à l'horizontale de la position de b
+
+   angle = atan2(y-b.y, b.x-x); // attention, l'axe y est vers le bas, d'où un tel choix
+   dist = std::sqrt( (x-b.x)*(x-b.x) + (y-b.y)*(y-b.y) );
+
+   // on s'assure d'avoir un angle dans [-pi,pi] car atan2 renvoie un angle dans [-pi,pi]
+   auto proj_angle = [] (double orientation) -> double {return (orientation - 2*M_PI * floor(orientation / (2*M_PI))) - M_PI;};
+   double orientation_norm = proj_angle(orientation); 
+   // seuils du cone de vue
+   double s_low = proj_angle(orientation_norm - alpha/2); 
+   double s_high = proj_angle(orientation_norm + alpha/2);
+
+   if ((angle >= s_low) && (angle <= s_high) && (dist <= dist_vue) && dynamic_cast<Gregaire*>(b.comportement) != nullptr)
+   {
+      cout << "je te vois" << endl;
+      cout << angle*180/M_PI << endl;
+   }
+
+   return ((angle >= s_low) && (angle <= s_high) && (dist <= dist_vue));
+}
+
+void Bestiole::setNeighbors(std::vector<Bestiole*> v){
+   voisins = v;
+}
+
+std::vector<Bestiole*>  Bestiole::getNeighbors()
+{
+   return voisins;
+}
+
+void Bestiole :: setOrientation(double o) 
+{
+   orientation = o;
 }
