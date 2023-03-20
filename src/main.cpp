@@ -11,7 +11,7 @@ using namespace std;
 
 int main()
 {
-   Aquarium       ecosysteme( 640, 480, 90 );
+   Aquarium       ecosysteme( 640, 480, 60 );
 
    ecosysteme.getMilieu().populate(TX_GREGAIRE, TX_PEUREUSE, TX_KAMIKAZE, TX_PREVOYANTE, TX_PERSOMULT, TOT);
    ecosysteme.run();

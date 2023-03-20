@@ -73,6 +73,16 @@ public :                                           // Forme canonique :
    double getOrientation() {return orientation;} ;
 
    void setOrientation(double o);
+
+   int getX() {return x;} ;
+   int getY() {return y;} ;
+
+   double getVitesse() {return vitesse;} ;
+
+   double getCumulX() {return cumulX;} ; 
+
+   double getCumulY() {return cumulY;} ;   
+
 };
 
 

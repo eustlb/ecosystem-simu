@@ -89,7 +89,7 @@ void Bestiole::bouge( int xLim, int yLim )
 
    double         nx, ny;
    double         dx = cos( orientation )*vitesse;
-   double         dy = -sin( orientation )*vitesse; // POURQUOI IL Y A UN - ????
+   double         dy = -sin( orientation )*vitesse; 
    int            cx, cy;
 
 
@@ -165,7 +165,7 @@ bool Bestiole::jeTeVois( const Bestiole & b ) const
 {
 
    double         dist;
-   double angle; // angle par rapport à l'horizontale de la position de b
+   double angle; // angle par rapport à l'horizontale de b
 
    angle = atan2(y-b.y, b.x-x); // attention, l'axe y est vers le bas, d'où un tel choix
    dist = std::sqrt( (x-b.x)*(x-b.x) + (y-b.y)*(y-b.y) );
@@ -177,11 +177,11 @@ bool Bestiole::jeTeVois( const Bestiole & b ) const
    double s_low = proj_angle(orientation_norm - alpha/2); 
    double s_high = proj_angle(orientation_norm + alpha/2);
 
-   if ((angle >= s_low) && (angle <= s_high) && (dist <= dist_vue) && dynamic_cast<Gregaire*>(b.comportement) != nullptr)
-   {
-      cout << "je te vois" << endl;
-      cout << angle*180/M_PI << endl;
-   }
+   // if ((angle >= s_low) && (angle <= s_high) && (dist <= dist_vue) && dynamic_cast<Gregaire*>(b.comportement) != nullptr)
+   // {
+   //    cout << "je te vois" << endl;
+   //    cout << angle*180/M_PI << endl;
+   // }
 
    return ((angle >= s_low) && (angle <= s_high) && (dist <= dist_vue));
 }
