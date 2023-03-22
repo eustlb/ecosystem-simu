@@ -5,6 +5,8 @@
 #include <cstdlib>
 #include <cmath>
 #include <tgmath.h> // pour fonction atan2
+#include <random> // pour expérience de Bernoulli
+
 
 #include "constantes.h"
 #include "Gregaire.h"
@@ -38,6 +40,10 @@ Bestiole::Bestiole( IComportement* comp )
    vie = rand() % MAX_VIE; 
    comportement = comp;
 
+   // Accessoires
+   // carapace
+   coef_carapace = 1; // à 1 par défaut, équivalent à pas de carapace
+
    // cout << "const Bestiole (" << identite << ") par defaut et vie :" << vie << endl;
 
 }
@@ -62,6 +68,8 @@ Bestiole::Bestiole( const Bestiole & b )
    alpha = b.alpha;
 
    vie = b.vie;
+
+   coef_carapace = b.coef_carapace;
 
 }
 
@@ -198,4 +206,20 @@ std::vector<Bestiole*>  Bestiole::getNeighbors()
 void Bestiole :: setOrientation(double o) 
 {
    orientation = o;
+}
+
+void Bestiole::coupDeGrace()
+{
+   // Créer un générateur de nombres aléatoireq
+   std::random_device rd;
+   // Générer un nombre aléatoire entre 0 et 1
+   double random_num = rd() / static_cast<double>(rd.max());
+
+   // Expérience de bernouilli de succès P/coef_carapace
+   if (random_num < (P/coef_carapace)) 
+   { // cas de mort
+
+      cout << "mort :" << random_num << endl;
+      vie = 0; // on set la vie à 0 pour que la bestiole soit considérée comme morte au prochain step
+   } 
 }

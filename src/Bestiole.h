@@ -17,8 +17,9 @@ class Milieu;
 class Bestiole
 {
 
-private :
+public :
    static const double     AFF_SIZE;
+private :
    static const double     MAX_VITESSE;
    static const int        MAX_VIE;
 
@@ -31,6 +32,7 @@ public :
    double            cumulX, cumulY;
    double            orientation;
    double            vitesse;
+   double            coef_carapace; // à mettre à 1 par défaut si pas de carapace.
 
    std::vector<Bestiole*>   voisins; // vecteur de pointeurs vers les bestioles perçues à la step considérée
 
@@ -82,6 +84,10 @@ public :                                           // Forme canonique :
    double getCumulX() {return cumulX;} ; 
 
    double getCumulY() {return cumulY;} ;   
+
+   void coupDeGrace();
+
+   int getIdentite() {return identite;};
 
 };
 

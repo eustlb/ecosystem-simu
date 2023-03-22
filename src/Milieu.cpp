@@ -3,9 +3,12 @@
 #include <cstdlib>
 #include <ctime>
 #include <vector>
+#include <list>
+#include <utility> // pour std::pair
 
 #include "IComportement.h"
 
+#include "Bestiole.h"
 #include "Gregaire.h"
 #include "Peureuse.h"
 #include "Kamikaze.h"
@@ -42,9 +45,29 @@ void Milieu::step( void )
 
    cimg_forXY( *this, x, y ) fillC( x, y, 0, white[0], white[1], white[2] );
 
-   // // on enlève du vecteur de Bestioles les bestioles qui sont mortes
-   // auto predicate = [](const Bestiole &b) { return b.vie < 1; };
-   // listeBestioles.erase(std::remove_if(listeBestioles.begin(), listeBestioles.end(), predicate), listeBestioles.end());
+   // on évalue toutes les bestioles entrées en collision et les morts éventuelles
+   // choix d'implementation : les bestioles ont un rayon de AFF_SIZE/5., collision si plus proches que 2x ce rayon
+
+      // on crée une liste des paires avec des identitées de vecteurs car on ne veut évaluer qu'une seule fois la mort lorsque les 
+      // deux cercles des bestioles se superposent (et pas à chaque step).
+
+
+   for ( std::vector<Bestiole>::iterator it1 = listeBestioles.begin() ; it1 != listeBestioles.end() ; ++it1 )
+   {
+      for ( std::vector<Bestiole>::iterator it2 = listeBestioles.begin() ; it2 != listeBestioles.end() ; ++it2 )
+      {
+         if ((!(*it1 == *it2)) && collision(&(*it1), &(*it2)))
+         {
+            it1->coupDeGrace();
+            it2->coupDeGrace();
+            cout << "collision" << endl;
+         }   
+      }
+   }
+
+   // on enlève du vecteur de Bestioles les bestioles qui sont mortes
+   auto predicate = [](const Bestiole &b) { return b.vie < 1; };
+   listeBestioles.erase(std::remove_if(listeBestioles.begin(), listeBestioles.end(), predicate), listeBestioles.end());
 
    // on actualiste la liste des voisins, c'est-à-dire des bestioles perçues par chaque bestioles
    for ( std::vector<Bestiole>::iterator it = listeBestioles.begin() ; it != listeBestioles.end() ; ++it )
@@ -58,6 +81,7 @@ void Milieu::step( void )
       // cout << it-> orientation << endl;
    }
 
+   // on fait bouger toutes les bestioles 
    for ( std::vector<Bestiole>::iterator it = listeBestioles.begin() ; it != listeBestioles.end() ; ++it )
    {
       it->action( *this );
@@ -139,4 +163,32 @@ void Milieu::actualiserVoisins(Bestiole & b) // actualiser la liste des bestiole
    b.setNeighbors(nvoisins);
 }
 
+bool Milieu::collision(Bestiole* b1, Bestiole* b2)
+{
+   int x1 = b1->getX();
+   int y1 = b1->getY();
 
+   int x2 = b2->getX();
+   int y2 = b2->getY();
+
+   std::pair<int,int> paire(b1->getIdentite(), b2->getIdentite());
+
+   bool is_in = std::find(en_collision.begin(), en_collision.end(), paire) != en_collision.end();
+
+   // choix d'implementation : les bestioles ont un rayon de AFF_SIZE/5., collision si plus proches que 2x ce rayon
+   double dist = std::sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+
+   double dist_coll = 10; // 2*Bestiole::AFF_SIZE/5;
+
+   if ((dist <= dist_coll) && (!is_in)) // si première rencontre, on ajoute à la liste des en collision
+   {
+      en_collision.push_back(paire);
+      return true;
+   }
+   if ((!(dist <= dist_coll)) && is_in) // dans les collision mais plus en collision, on retire
+   {
+      en_collision.remove(paire);
+      return false;
+   }
+   return false;
+}

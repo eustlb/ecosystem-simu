@@ -25,5 +25,8 @@ const double CAPA_OUIE_MAX = 0.8;
 // seuil pour la bestiole peureuse
 const int S_PEUREUSE = 1000;
 
+// probabilité de mort lors d'une collision 
+const double P = 0.5;
+
 
 

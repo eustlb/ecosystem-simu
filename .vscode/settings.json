@@ -64,6 +64,8 @@
         "variant": "cpp",
         "vector": "cpp",
         "algorithm": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "list": "cpp",
+        "random": "cpp"
     }
 }

@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <vector>
+#include <list>
 
 #include "Bestiole.h"
 
@@ -19,6 +20,7 @@ private :
 
    int                     width, height;
    std::vector<Bestiole>   listeBestioles;
+   std::list<std::pair<int, int>> en_collision; // on crée une liste des paires avec des identitées de vecteurs car on ne veut évaluer qu'une seule fois la mort lorsque les deux cercles des bestioles se superposent (et pas à chaque step).
 
 public :
    Milieu( int _width, int _height );
@@ -35,6 +37,8 @@ public :
    void populate(float tx_gregaire, float tx_peureuse, float tx_kamikaze, float tx_prevoyante, float tx_persoMult, int tot);
 
    void actualiserVoisins(Bestiole & b); // actualiser la liste des bestioles perçues par b
+
+   bool collision(Bestiole* b1, Bestiole* b2);
 
 };
 
