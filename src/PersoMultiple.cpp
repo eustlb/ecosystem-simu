@@ -2,9 +2,9 @@
 
 PersoMultiple::PersoMultiple(Gregaire* c_gregaire, Peureuse* c_peureuse, Kamikaze* c_kamikaze, Prevoyante* c_prevoyante)
 {
-    couleur[ 0 ] = 255;
-    couleur[ 1 ] = 51;
-    couleur[ 2 ] = 202;
+    couleur[ 0 ] = 71;
+    couleur[ 1 ] = 80;
+    couleur[ 2 ] = 88;
 
     // couleur[ 0 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
     // couleur[ 1 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );

@@ -5,9 +5,9 @@
 
 Kamikaze::Kamikaze()
 {
-    couleur [0] = 255;
-    couleur [1] = 0;
-    couleur [2] = 0;
+    couleur [0] = 217;
+    couleur [1] = 81;
+    couleur [2] = 23;
 
     // couleur[ 0 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
     // couleur[ 1 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );

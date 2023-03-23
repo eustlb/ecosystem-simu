@@ -4,9 +4,9 @@
 
 Peureuse::Peureuse()
 {
-    couleur [0] = 121;
-    couleur [1] = 28;
-    couleur [2] = 248;
+    couleur [0] = 203;
+    couleur [1] = 171;
+    couleur [2] = 1;
 
     // couleur[ 0 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
     // couleur[ 1 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
