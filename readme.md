@@ -40,3 +40,7 @@ All the parameters of the simulation and their  description can be found and set
 
 A window should appear, enjoy !
 
+# Implemented features
+
+All the required features were implemented, excepted the "prevoyante" behavior, beasts cloning and "capteurs"/ "accessoires" visualisation.
+
