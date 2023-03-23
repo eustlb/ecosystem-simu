@@ -5,9 +5,9 @@
 
 Gregaire::Gregaire()
 {
-    couleur [0] = 49;
-    couleur [1] = 140;
-    couleur [2] = 230;
+    couleur [0] = 48;
+    couleur [1] = 112;
+    couleur [2] = 179;
 
     // couleur[ 0 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
     // couleur[ 1 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
