@@ -32,7 +32,6 @@ public :
    double            cumulX, cumulY;
    double            orientation;
    double            vitesse;
-   double            coef_carapace; // à mettre à 1 par défaut si pas de carapace.
 
    std::vector<Bestiole*>   voisins; // vecteur de pointeurs vers les bestioles perçues à la step considérée
 
@@ -44,6 +43,12 @@ public: // attributs des capteurs
    // oreilles
    double dist_ouie;
    double capa_ouie;
+
+public: // attributs des accesoires
+   // nageoires
+   double coef_nageoires; // à mettre à 1 par défaut si pas de nageoires.
+   double coef_carapace; // à mettre à 1 par défaut si pas de carapace.
+   double coef_camouflage; // à mettre à 0 par défaut si pas de camouflave
 
 public :
    int               vie; // -1 à chaque step, morte si 0 

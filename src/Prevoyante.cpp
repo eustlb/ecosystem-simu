@@ -1,4 +1,5 @@
 #include "Prevoyante.h"
+#include "Bestiole.h"
 
 Prevoyante::Prevoyante()
 {
@@ -13,7 +14,6 @@ Prevoyante::Prevoyante()
 
 void Prevoyante::bouge(int xLim, int yLim, Bestiole* bestiole)
 {
-    
-
-
+    // on appelle la méthode bouge classique de notre bestiole avec ces paramètre actualisés
+    bestiole->bouge(xLim, yLim);
 }

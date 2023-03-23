@@ -2,9 +2,13 @@
 
 PersoMultiple::PersoMultiple(Gregaire* c_gregaire, Peureuse* c_peureuse, Kamikaze* c_kamikaze, Prevoyante* c_prevoyante)
 {
-    couleur[ 0 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-    couleur[ 1 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-    couleur[ 2 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
+    couleur[ 0 ] = 255;
+    couleur[ 1 ] = 51;
+    couleur[ 2 ] = 202;
+
+    // couleur[ 0 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
+    // couleur[ 1 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
+    // couleur[ 2 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
 
     comportements[0] = c_gregaire;
     comportements[1] = c_peureuse;
@@ -17,7 +21,7 @@ PersoMultiple::PersoMultiple(Gregaire* c_gregaire, Peureuse* c_peureuse, Kamikaz
 
 void PersoMultiple::bouge(int xLim, int yLim, Bestiole* bestiole)
 {
-
+    actualComp->bouge(xLim, yLim, bestiole);
 }
 
 void PersoMultiple::changeComp()
