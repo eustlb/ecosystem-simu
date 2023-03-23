@@ -2,7 +2,8 @@
 
 ### Ecosystem simulation
 
-Eustache Le Bihan, Antoine Guillou, Maxence Cisse, François Goujon
+Eustache Le Bihan, Antoine Guillou, Maxence Cisse, François Goujon  
+[Slides](https://docs.google.com/presentation/d/1rCD23_DhoyQQBm1EI2nZ__1x8R_TTviz40ElkV2aOEo/edit?usp=sharing)
 
 # Project description 
 
