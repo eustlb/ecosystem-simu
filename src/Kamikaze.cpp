@@ -1,6 +1,6 @@
 #include "Kamikaze.h"
 #include "Bestiole.h"
-
+#include <tuple>
 #include <tgmath.h> // pour fonction atan2
 
 Kamikaze::Kamikaze()
